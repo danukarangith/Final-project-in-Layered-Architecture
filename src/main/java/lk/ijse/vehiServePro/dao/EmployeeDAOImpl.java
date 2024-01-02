@@ -1,11 +1,7 @@
-package lk.ijse.vehiServePro.model;
+package lk.ijse.vehiServePro.dao;
 
-import lk.ijse.vehiServePro.dao.EmployeeDAO;
-import lk.ijse.vehiServePro.dao.EmployeeDAOImpl;
 import lk.ijse.vehiServePro.db.DbConnection;
-import lk.ijse.vehiServePro.dto.CustomerDTO;
 import lk.ijse.vehiServePro.dto.EmployeeDTO;
-import lk.ijse.vehiServePro.dto.tm.EmployeeTm;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,9 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeModel {
+public class EmployeeDAOImpl implements EmployeeDAO {
+    @Override
     public boolean saveEmployee(final EmployeeDTO dto) throws SQLException {
-       /* Connection connection = DbConnection.getInstance().getConnection();
+        Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO employee VALUES(?,?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -29,14 +26,11 @@ public class EmployeeModel {
         pstm.setString(6, dto.getUser());
 
         boolean isSaved = pstm.executeUpdate() > 0;
-        return isSaved;*/
-
-        EmployeeDAOImpl  employeeDAO = new EmployeeDAOImpl();
-        boolean isSaved = employeeDAO.saveEmployee(new EmployeeDTO(dto.getName(),dto.getId(),dto.getContact(),dto.getAddress(),dto.getType(),dto.getUser()));
         return isSaved;
     }
+
     public boolean updateEmployee( EmployeeDTO dto) throws SQLException {
-       /* Connection connection = DbConnection.getInstance().getConnection();
+        Connection connection = DbConnection.getInstance().getConnection();
 
 
         String sql = "UPDATE employee set employee_id = ?,emp_address = ? ,emp_contact_number=?,emp_type=?,user_name = ? WHERE emp_name = ?";
@@ -52,28 +46,21 @@ public class EmployeeModel {
 
 
 
-        return pstm.executeUpdate() > 0;*/
-        EmployeeDAOImpl employeeDAO = new EmployeeDAOImpl();
-        boolean isUpdate = employeeDAO.updateEmployee(new EmployeeDTO(dto.getName(),dto.getId(),dto.getAddress(),dto.getContact(),dto.getType(),dto.getUser()));
-        return isUpdate;
+        return pstm.executeUpdate() > 0;
     }
 
     public boolean deleteCustomer(String id) throws SQLException{
-       /* Connection connection = DbConnection.getInstance().getConnection();
+        Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "DELETE FROM employee WHERE emp_name = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1,id);
 
-        return pstm.executeUpdate()>0;*/
-
-        EmployeeDAOImpl employeeDAO = new EmployeeDAOImpl();
-        boolean isDelete = employeeDAO.deleteCustomer(id);
-        return isDelete;
+        return pstm.executeUpdate()>0;
     }
 
     public List<EmployeeDTO> getAllEmployee() throws SQLException {
-        /*Connection connection = DbConnection.getInstance().getConnection();
+        Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM employee";
         ResultSet resultSet = connection.prepareStatement(sql).executeQuery();
@@ -91,23 +78,7 @@ public class EmployeeModel {
 
             ));
         }
-        return cusList;*/
-        EmployeeDAOImpl employeeDAO = new EmployeeDAOImpl();
-        ArrayList<EmployeeDTO> allEmployee = (ArrayList<EmployeeDTO>) employeeDAO.getAllEmployee();
-        for (EmployeeDTO dto : allEmployee){
-            new EmployeeTm(
-                    dto.getName(),
-                    dto.getId(),
-                    dto.getAddress(),
-                    dto.getContact(),
-                    dto.getType(),
-                    dto.getUser()
-
-
-            );
-
-        }
-        return allEmployee;
+        return cusList;
     }
 
 
