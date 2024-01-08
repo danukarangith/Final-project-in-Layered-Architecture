@@ -1,5 +1,6 @@
-package lk.ijse.vehiServePro.dao;
+package lk.ijse.vehiServePro.dao.custom.impl;
 
+import lk.ijse.vehiServePro.dao.custom.PaymentDAO;
 import lk.ijse.vehiServePro.db.DbConnection;
 import lk.ijse.vehiServePro.dto.PaymentDTO;
 

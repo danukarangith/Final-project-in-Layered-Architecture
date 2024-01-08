@@ -39,7 +39,7 @@ public class VehiclePageController  {
         private TextField txtId;
 
         @FXML
-        private TextField txtCid;
+        private TextField txtCname;
 
         @FXML
         private TextField txtNum;
@@ -64,7 +64,7 @@ public class VehiclePageController  {
         translate.play();
 
         String id = txtId.getText();
-        String name = txtCid.getText();
+        String name = txtCname.getText();
         String num = txtNum.getText();
         String brand = txtBrand.getText();
         String type = txtType.getText();
@@ -86,7 +86,7 @@ public class VehiclePageController  {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
         String id = txtId.getText();
-        String name = txtCid.getText();
+        String name = txtCname.getText();
         String num = txtNum.getText();
         String brand = txtBrand.getText();
         String type = txtType.getText();

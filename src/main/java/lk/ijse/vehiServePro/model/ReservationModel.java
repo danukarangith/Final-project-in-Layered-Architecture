@@ -1,15 +1,9 @@
 package lk.ijse.vehiServePro.model;
 
-import lk.ijse.vehiServePro.dao.ReservationDAOImpl;
-import lk.ijse.vehiServePro.db.DbConnection;
-import lk.ijse.vehiServePro.dto.CustomerDTO;
-import lk.ijse.vehiServePro.dto.EmployeeDTO;
+import lk.ijse.vehiServePro.dao.custom.impl.ReservationDAOImpl;
 import lk.ijse.vehiServePro.dto.ReservationDTO;
 import lk.ijse.vehiServePro.dto.tm.ReservationTm;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

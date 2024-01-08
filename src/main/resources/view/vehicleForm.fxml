@@ -71,7 +71,7 @@
                   <Font name="System Bold" size="48.0" />
                </font>
             </Text>
-            <TextField fx:id="txtCid" layoutX="96.0" layoutY="415.0" prefHeight="44.0" prefWidth="378.0" styleClass="text-field" />
+            <TextField fx:id="txtCname" layoutX="96.0" layoutY="415.0" prefHeight="44.0" prefWidth="378.0" styleClass="text-field" />
             <Text fill="#f5efef" layoutX="627.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vehicle Type">
                <font>
                   <Font name="System Bold" size="24.0" />

@@ -1,12 +1,8 @@
 package lk.ijse.vehiServePro.model;
 
-import lk.ijse.vehiServePro.dao.PaymentDAOImpl;
-import lk.ijse.vehiServePro.db.DbConnection;
-import lk.ijse.vehiServePro.dto.CustomerDTO;
+import lk.ijse.vehiServePro.dao.custom.impl.PaymentDAOImpl;
 import lk.ijse.vehiServePro.dto.PaymentDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class PaymentModel {

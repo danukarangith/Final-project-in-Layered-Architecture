@@ -1,15 +1,10 @@
 package lk.ijse.vehiServePro.model;
 
-import lk.ijse.vehiServePro.dao.StocksDAOImpl;
-import lk.ijse.vehiServePro.db.DbConnection;
-import lk.ijse.vehiServePro.dto.CustomerDTO;
+import lk.ijse.vehiServePro.dao.custom.impl.StocksDAOImpl;
 
 import lk.ijse.vehiServePro.dto.StocksDTO;
 import lk.ijse.vehiServePro.dto.tm.StockTm;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package lk.ijse.vehiServePro.dao;
+package lk.ijse.vehiServePro.dao.custom;
 
 import lk.ijse.vehiServePro.dto.ServiceDetailDTO;
 
