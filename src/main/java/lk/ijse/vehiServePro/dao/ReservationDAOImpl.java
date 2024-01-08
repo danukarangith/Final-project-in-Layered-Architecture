@@ -1,11 +1,7 @@
-package lk.ijse.vehiServePro.model;
+package lk.ijse.vehiServePro.dao;
 
-import lk.ijse.vehiServePro.dao.ReservationDAOImpl;
 import lk.ijse.vehiServePro.db.DbConnection;
-import lk.ijse.vehiServePro.dto.CustomerDTO;
-import lk.ijse.vehiServePro.dto.EmployeeDTO;
 import lk.ijse.vehiServePro.dto.ReservationDTO;
-import lk.ijse.vehiServePro.dto.tm.ReservationTm;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,9 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationModel {
-    public boolean saveReservation(final ReservationDTO dto) throws SQLException {
-       /* Connection connection = DbConnection.getInstance().getConnection();
+public class ReservationDAOImpl implements ReservationDAO {
+
+   @Override
+   public boolean saveReservation(final ReservationDTO dto) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO reservation VALUES(?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -28,14 +26,12 @@ public class ReservationModel {
         pstm.setString(5, dto.getTime());
 
         boolean isSaved = pstm.executeUpdate() > 0;
-        return isSaved;*/
-
-        ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
-        boolean isSaved = reservationDAO.saveReservation(new ReservationDTO(dto.getId(),dto.getEmail(),dto.getVehNum(),dto.getDate(),dto.getTime()));
         return isSaved;
     }
+
+    @Override
     public boolean updateReservation( ReservationDTO dto) throws SQLException {
-       /* Connection connection = DbConnection.getInstance().getConnection();
+        Connection connection = DbConnection.getInstance().getConnection();
 
 
         String sql = "UPDATE reservation set reservation_email = ?,reservation_VehNum = ? ,reservation_date=?,reservation_time=? WHERE reservation_id = ?";
@@ -51,27 +47,21 @@ public class ReservationModel {
 
 
 
-        return pstm.executeUpdate() > 0;*/
-
-        ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
-        boolean isUpdate = reservationDAO.updateReservation(new ReservationDTO(dto.getId(),dto.getEmail(),dto.getVehNum(),dto.getDate(),dto.getTime()));
-        return isUpdate;
+        return pstm.executeUpdate() > 0;
     }
-    public boolean deleteReservation(String id) throws SQLException{
-        /*Connection connection = DbConnection.getInstance().getConnection();
+   @Override
+   public boolean deleteReservation(String id) throws SQLException{
+        Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "DELETE FROM reservation WHERE reservation_id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1,id);
 
-        return pstm.executeUpdate()>0;*/
-
-        ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
-        boolean isDelete = reservationDAO.deleteReservation(id);
-        return isDelete;
+        return pstm.executeUpdate()>0;
     }
+
     public List<ReservationDTO> getAllReservation() throws SQLException {
-        /*Connection connection = DbConnection.getInstance().getConnection();
+        Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM reservation";
         ResultSet resultSet = connection.prepareStatement(sql).executeQuery();
@@ -87,15 +77,6 @@ public class ReservationModel {
                     resultSet.getString(5)
             ));
         }
-        return cusList;*/
-        ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
-        ArrayList<ReservationDTO> allReservation = (ArrayList<ReservationDTO>) reservationDAO.getAllReservation();
-        for (ReservationDTO dto : allReservation){
-            new ReservationTm(
-                    dto.getId(),dto.getEmail(),dto.getVehNum(),dto.getDate(),dto.getTime()
-            );
-        }
-        return allReservation;
+        return cusList;
     }
-
 }
