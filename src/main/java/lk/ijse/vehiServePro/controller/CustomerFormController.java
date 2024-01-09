@@ -14,6 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.vehiServePro.Utill.EmailSender;
+import lk.ijse.vehiServePro.bo.BOFactory;
+import lk.ijse.vehiServePro.bo.custom.CustomerBO;
 import lk.ijse.vehiServePro.dto.CustomerDTO;
 import lk.ijse.vehiServePro.dto.tm.CustomerTm;
 import lk.ijse.vehiServePro.model.CustomerModel;
@@ -64,6 +66,8 @@ public class CustomerFormController {
     @FXML
     private TextField txtSendEmail;
 
+    CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBO(BOFactory.BoTypes.CUSTOMER);
+
 
     public void initialize(){
         setCellValueFactory();
@@ -80,12 +84,12 @@ public class CustomerFormController {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
     private void loadAllCustomer(){
-        var model = new CustomerModel();
+
 
         ObservableList<CustomerTm> obList = FXCollections.observableArrayList();
 
         try{
-            List<CustomerDTO> dtoList = model.getAllCustomers();
+            List<CustomerDTO> dtoList = customerBO.getAllCustomer();
 
             for (CustomerDTO dto : dtoList){
                 obList.add(
@@ -118,9 +122,9 @@ public class CustomerFormController {
         if (isValidate) {
             var dto = new CustomerDTO(id, name, address,contact,email);
 
-            var model = new CustomerModel();
+
             try {
-                boolean isSaved = model.saveCustomer(dto);
+                boolean isSaved = customerBO.saveCustomer(dto);
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "customer saved!").show();
                     clearFields();
@@ -193,10 +197,10 @@ public class CustomerFormController {
         CustomerDTO  dto = new CustomerDTO(id,name,address,email,contact);
 
 
-        var model = new CustomerModel();
+
         try{
 
-            boolean isUpdated = model.updateCustomer(dto);
+            boolean isUpdated = customerBO.updateCustomer(dto);
             System.out.println(isUpdated);
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Customer Updated!").show();
@@ -211,9 +215,9 @@ public class CustomerFormController {
     void btnDeleteOnAction(ActionEvent event) {
         String id = txtId.getText();
 
-        var customerModel = new CustomerModel();
+
         try{
-            boolean isDeleted = customerModel.deleteCustomer(id);
+            boolean isDeleted = customerBO.deleteCustomer(id);
 
             if(isDeleted){
                 tblCustomer.refresh();

@@ -14,7 +14,7 @@ import java.util.List;
 public class ReservationDAOImpl implements ReservationDAO {
 
    @Override
-   public boolean saveReservation(final ReservationDTO dto) throws SQLException {
+   public boolean save(final ReservationDTO dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO reservation VALUES(?,?,?,?,?)";
