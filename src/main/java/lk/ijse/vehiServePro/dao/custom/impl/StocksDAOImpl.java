@@ -1,8 +1,10 @@
 package lk.ijse.vehiServePro.dao.custom.impl;
 
+import lk.ijse.vehiServePro.dao.SQLUtil;
 import lk.ijse.vehiServePro.dao.custom.StocksDAO;
 import lk.ijse.vehiServePro.db.DbConnection;
 import lk.ijse.vehiServePro.dto.StocksDTO;
+import lk.ijse.vehiServePro.entity.Stock;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,8 +15,8 @@ import java.util.List;
 
 public class StocksDAOImpl implements StocksDAO {
     @Override
-    public boolean saveItem(final StocksDTO dto) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+    public boolean save(final Stock entity) throws SQLException {
+      /*  Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO stock VALUES(?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -27,11 +29,18 @@ public class StocksDAOImpl implements StocksDAO {
 
 
         boolean isSaved = pstm.executeUpdate() > 0;
-        return isSaved;
+        return isSaved;*/
+       return SQLUtil.excecute("INSERT INTO stock VALUES(?,?,?,?,?)",
+                entity.getId(),
+                entity.getName(),
+                entity.getPrice(),
+                entity.getRemain(),
+                entity.getUser()
+        );
     }
     @Override
-    public boolean updateStock( StocksDTO dto) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+    public boolean update( Stock entity) throws SQLException {
+       /* Connection connection = DbConnection.getInstance().getConnection();
 
 
         String sql = "UPDATE stock set stock_name = ?,stock_price = ?,stock_remain = ?,user_name = ?  WHERE stock_id = ?";
@@ -43,29 +52,38 @@ public class StocksDAOImpl implements StocksDAO {
         pstm.setString(5, dto.getId());
 
 
-        return pstm.executeUpdate() > 0;
+        return pstm.executeUpdate() > 0;*/
+       return SQLUtil.excecute("UPDATE stock set stock_name = ?,stock_price = ?,stock_remain = ?,user_name = ?  WHERE stock_id = ?",
+                entity.getName(),
+                entity.getPrice(),
+                entity.getRemain(),
+                entity.getUser(),
+                entity.getId()
+        );
     }
     @Override
-    public boolean deleteStock(String id) throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
+    public boolean delete(String id) throws SQLException{
+        /*Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "DELETE FROM stock WHERE stock_id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1,id);
 
-        return pstm.executeUpdate()>0;
+        return pstm.executeUpdate()>0;*/
+        return SQLUtil.excecute( "DELETE FROM stock WHERE stock_id = ?",id);
     }
    @Override
-   public List<StocksDTO> getAllStock() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+   public List<Stock> getAll() throws SQLException {
+        /*Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM stock";
-        ResultSet resultSet = connection.prepareStatement(sql).executeQuery();
+        ResultSet resultSet = connection.prepareStatement(sql).executeQuery();*/
+       ResultSet resultSet = SQLUtil.excecute("SELECT * FROM stock");
 
-        List<StocksDTO> cusList = new ArrayList<>();
+        List<Stock> cusList = new ArrayList<>();
 
         while (resultSet.next()) {
-            cusList.add(new StocksDTO(
+            cusList.add(new Stock(
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeModel {
-    public boolean saveEmployee(final EmployeeDTO dto) throws SQLException {
-       /* Connection connection = DbConnection.getInstance().getConnection();
+   /* public boolean saveEmployee(final EmployeeDTO dto) throws SQLException {
+       *//* Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO employee VALUES(?,?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -23,14 +23,14 @@ public class EmployeeModel {
         pstm.setString(6, dto.getUser());
 
         boolean isSaved = pstm.executeUpdate() > 0;
-        return isSaved;*/
+        return isSaved;*//*
 
         EmployeeDAOImpl  employeeDAO = new EmployeeDAOImpl();
         boolean isSaved = employeeDAO.saveEmployee(new EmployeeDTO(dto.getName(),dto.getId(),dto.getContact(),dto.getAddress(),dto.getType(),dto.getUser()));
         return isSaved;
     }
     public boolean updateEmployee( EmployeeDTO dto) throws SQLException {
-       /* Connection connection = DbConnection.getInstance().getConnection();
+       *//* Connection connection = DbConnection.getInstance().getConnection();
 
 
         String sql = "UPDATE employee set employee_id = ?,emp_address = ? ,emp_contact_number=?,emp_type=?,user_name = ? WHERE emp_name = ?";
@@ -46,20 +46,20 @@ public class EmployeeModel {
 
 
 
-        return pstm.executeUpdate() > 0;*/
+        return pstm.executeUpdate() > 0;*//*
         EmployeeDAOImpl employeeDAO = new EmployeeDAOImpl();
         boolean isUpdate = employeeDAO.updateEmployee(new EmployeeDTO(dto.getName(),dto.getId(),dto.getAddress(),dto.getContact(),dto.getType(),dto.getUser()));
         return isUpdate;
     }
 
     public boolean deleteCustomer(String id) throws SQLException{
-       /* Connection connection = DbConnection.getInstance().getConnection();
+       *//* Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "DELETE FROM employee WHERE emp_name = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1,id);
 
-        return pstm.executeUpdate()>0;*/
+        return pstm.executeUpdate()>0;*//*
 
         EmployeeDAOImpl employeeDAO = new EmployeeDAOImpl();
         boolean isDelete = employeeDAO.deleteCustomer(id);
@@ -67,7 +67,7 @@ public class EmployeeModel {
     }
 
     public List<EmployeeDTO> getAllEmployee() throws SQLException {
-        /*Connection connection = DbConnection.getInstance().getConnection();
+        *//*Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM employee";
         ResultSet resultSet = connection.prepareStatement(sql).executeQuery();
@@ -85,7 +85,7 @@ public class EmployeeModel {
 
             ));
         }
-        return cusList;*/
+        return cusList;*//*
         EmployeeDAOImpl employeeDAO = new EmployeeDAOImpl();
         ArrayList<EmployeeDTO> allEmployee = (ArrayList<EmployeeDTO>) employeeDAO.getAllEmployee();
         for (EmployeeDTO dto : allEmployee){
@@ -104,5 +104,5 @@ public class EmployeeModel {
         return allEmployee;
     }
 
-
+*/
 }

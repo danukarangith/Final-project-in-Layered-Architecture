@@ -6,8 +6,8 @@ import lk.ijse.vehiServePro.dto.PaymentDTO;
 import java.sql.SQLException;
 
 public class PaymentModel {
-    public boolean savePayment(final PaymentDTO dto) throws SQLException {
-        /*Connection connection = DbConnection.getInstance().getConnection();
+   /* public boolean savePayment(final PaymentDTO dto) throws SQLException {
+        *//*Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO payment VALUES(?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -19,14 +19,14 @@ public class PaymentModel {
         pstm.setString(5, dto.getDetail());
 
         boolean isSaved = pstm.executeUpdate() > 0;
-        return isSaved;*/
+        return isSaved;*//*
 
         PaymentDAOImpl paymentDAO = new PaymentDAOImpl();
-        boolean isSaved = paymentDAO.savePayment(new PaymentDTO(dto.getId(),dto.getName(),dto.getAmount(),dto.getMethod(),dto.getDetail()));
+        boolean isSaved = paymentDAO.save(new PaymentDTO(dto.getId(),dto.getName(),dto.getAmount(),dto.getMethod(),dto.getDetail()));
         return isSaved;
     }
     public boolean updatePayment( PaymentDTO dto) throws SQLException {
-        /*Connection connection = DbConnection.getInstance().getConnection();
+        *//*Connection connection = DbConnection.getInstance().getConnection();
 
 
         String sql = "UPDATE payment set customer_name = ?,payment_amount = ?,payment_method = ? ,detail = ? WHERE payment_id = ?";
@@ -38,23 +38,23 @@ public class PaymentModel {
         pstm.setString(5, dto.getId());
 
 
-        return pstm.executeUpdate() > 0;*/
+        return pstm.executeUpdate() > 0;*//*
 
         PaymentDAOImpl paymentDAO = new PaymentDAOImpl();
         boolean isUpdated = paymentDAO.updatePayment(new PaymentDTO(dto.getId(),dto.getName(),dto.getAmount(),dto.getMethod(),dto.getDetail()));
         return isUpdated;
     }
     public boolean deletePayment(String id) throws SQLException{
-       /* Connection connection = DbConnection.getInstance().getConnection();
+       *//* Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "DELETE FROM payment WHERE payment_id= ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1,id);
 
-        return pstm.executeUpdate()>0;*/
+        return pstm.executeUpdate()>0;*//*
 
         PaymentDAOImpl paymentDAO = new PaymentDAOImpl();
         boolean isDelete = paymentDAO.deletePayment(id);
         return isDelete;
-    }
+    }*/
 }

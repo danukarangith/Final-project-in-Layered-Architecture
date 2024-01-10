@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierModel {
-    public boolean saveSupplier(final SupplierDTO dto) throws SQLException {
-       /* Connection connection = DbConnection.getInstance().getConnection();
+   /* public boolean saveSupplier(final SupplierDTO dto) throws SQLException {
+       *//* Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO stock_supplier VALUES(?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -22,13 +22,13 @@ public class SupplierModel {
 
 
         boolean isSaved = pstm.executeUpdate() > 0;
-        return isSaved;*/
+        return isSaved;*//*
         SupplierDAOImpl supplierDAO = new SupplierDAOImpl();
         boolean isSave = supplierDAO.saveSupplier(new SupplierDTO(dto.getId(),dto.getName(),dto.getAddress()));
         return isSave;
     }
     public boolean updateSupplier( SupplierDTO dto) throws SQLException {
-       /* Connection connection = DbConnection.getInstance().getConnection();
+       *//* Connection connection = DbConnection.getInstance().getConnection();
 
 
         String sql = "UPDATE stock_supplier set sup_name = ?,sup_address = ?  WHERE stock_supplier_id = ?";
@@ -38,25 +38,25 @@ public class SupplierModel {
         pstm.setString(3, dto.getId());
 
 
-        return pstm.executeUpdate() > 0;*/
+        return pstm.executeUpdate() > 0;*//*
         SupplierDAOImpl supplierDAO = new SupplierDAOImpl();
         boolean isUpdate = supplierDAO.updateSupplier(new SupplierDTO(dto.getId(),dto.getName(),dto.getAddress()));
         return isUpdate;
     }
     public boolean deleteSupplier(String id) throws SQLException{
-        /*Connection connection = DbConnection.getInstance().getConnection();
+        *//*Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "DELETE FROM stock_supplier WHERE stock_supplier_id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1,id);
 
-        return pstm.executeUpdate()>0;*/
+        return pstm.executeUpdate()>0;*//*
         SupplierDAOImpl supplierDAO = new SupplierDAOImpl();
         boolean isDelete = supplierDAO.deleteSupplier(id);
         return isDelete;
     }
     public List<SupplierDTO> getAllSupplier() throws SQLException {
-        /*Connection connection = DbConnection.getInstance().getConnection();
+        *//*Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM stock_supplier";
         ResultSet resultSet = connection.prepareStatement(sql).executeQuery();
@@ -71,12 +71,12 @@ public class SupplierModel {
 
             ));
         }
-        return cusList;*/
+        return cusList;*//*
         SupplierDAOImpl supplierDAO = new SupplierDAOImpl();
         ArrayList<SupplierDTO> allSupplier = (ArrayList<SupplierDTO>) supplierDAO.getAllSupplier();
         for (SupplierDTO dto : allSupplier){
             new SupplierDetailTm(dto.getId(),dto.getName(),dto.getAddress());
         }
         return allSupplier;
-    }
+    }*/
 }

@@ -1,8 +1,10 @@
 package lk.ijse.vehiServePro.dao.custom.impl;
 
+import lk.ijse.vehiServePro.dao.SQLUtil;
 import lk.ijse.vehiServePro.dao.custom.VehicleDAO;
 import lk.ijse.vehiServePro.db.DbConnection;
 import lk.ijse.vehiServePro.dto.VehicleDTO;
+import lk.ijse.vehiServePro.entity.Vehicle;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,8 +15,8 @@ import java.util.List;
 
 public class VehicleDAOImpl implements VehicleDAO {
    @Override
-   public boolean saveVehicle(final VehicleDTO dto) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+   public boolean save(final Vehicle entity) throws SQLException {
+       /* Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO vehicle VALUES(?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -26,11 +28,18 @@ public class VehicleDAOImpl implements VehicleDAO {
         pstm.setString(5, dto.getType());
 
         boolean isSaved = pstm.executeUpdate() > 0;
-        return isSaved;
+        return isSaved;*/
+      return SQLUtil.excecute("INSERT INTO vehicle VALUES(?,?,?,?,?)",
+               entity.getId(),
+               entity.getName(),
+               entity.getNum(),
+               entity.getBrand(),
+               entity.getType()
+       );
     }
    @Override
-   public boolean updateVehicle( VehicleDTO dto) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+   public boolean update( Vehicle entity) throws SQLException {
+       /* Connection connection = DbConnection.getInstance().getConnection();
 
 
         String sql = "UPDATE vehicle set customer_id = ?,veh_num = ?,veh_brand = ? ,veh_type = ? WHERE vehicle_id = ?";
@@ -42,29 +51,39 @@ public class VehicleDAOImpl implements VehicleDAO {
         pstm.setString(5, dto.getId());
 
 
-        return pstm.executeUpdate() > 0;
+        return pstm.executeUpdate() > 0;*/
+      return SQLUtil.excecute("UPDATE vehicle set customer_id = ?,veh_num = ?,veh_brand = ? ,veh_type = ? WHERE vehicle_id = ?",
+               entity.getName(),
+               entity.getNum(),
+               entity.getBrand(),
+               entity.getType(),
+               entity.getId()
+       );
     }
    @Override
-   public boolean deleteCustomer(String id) throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
+   public boolean delete(String id) throws SQLException{
+       /* Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "DELETE FROM vehicle WHERE vehicle_id = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1,id);
 
-        return pstm.executeUpdate()>0;
+        return pstm.executeUpdate()>0;*/
+
+      return SQLUtil.excecute("DELETE FROM vehicle WHERE vehicle_id = ?",id);
     }
     @Override
-    public List<VehicleDTO> getAllVehicle() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+    public List<Vehicle> getAll() throws SQLException {
+       /* Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM vehicle";
-        ResultSet resultSet = connection.prepareStatement(sql).executeQuery();
+        ResultSet resultSet = connection.prepareStatement(sql).executeQuery();*/
+        ResultSet resultSet = SQLUtil.excecute("SELECT * FROM vehicle");
 
-        List<VehicleDTO> cusList = new ArrayList<>();
+        List<Vehicle> cusList = new ArrayList<>();
 
         while (resultSet.next()) {
-            cusList.add(new VehicleDTO(
+            cusList.add(new Vehicle(
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),

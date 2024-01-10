@@ -93,7 +93,7 @@ public class StockFormContoller {
         ObservableList<StockTm> obList = FXCollections.observableArrayList();
 
         try{
-            List<StocksDTO> dtoList = model.getAllStock();
+            List<StocksDTO> dtoList = model.getAll();
 
             for (StocksDTO dto : dtoList){
                 obList.add(
