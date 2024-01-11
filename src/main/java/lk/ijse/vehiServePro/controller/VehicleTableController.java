@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.vehiServePro.bo.BOFactory;
+import lk.ijse.vehiServePro.bo.custom.VehicleBO;
 import lk.ijse.vehiServePro.dto.StocksDTO;
 import lk.ijse.vehiServePro.dto.VehicleDTO;
 
@@ -37,6 +39,7 @@ public class VehicleTableController {
 
     @FXML
     private TableColumn<?, ?> colType;
+    VehicleBO vehicleBO = (VehicleBO) BOFactory.getBoFactory().getBO(BOFactory.BoTypes.VEHICLE);
 
 
 
@@ -56,12 +59,12 @@ public class VehicleTableController {
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
     }
     private void loadAllCustomer(){
-        var model = new VehicleModel();
+       // var model = new VehicleModel();
 
         ObservableList<VehicleTm> obList = FXCollections.observableArrayList();
 
         try{
-            List<VehicleDTO> dtoList = model.getAllVehicle();
+            List<VehicleDTO> dtoList = vehicleBO.getAllVehicle();
 
             for (VehicleDTO dto : dtoList){
                 obList.add(

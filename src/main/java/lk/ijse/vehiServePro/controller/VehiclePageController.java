@@ -18,6 +18,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.vehiServePro.bo.BOFactory;
+import lk.ijse.vehiServePro.bo.custom.VehicleBO;
 import lk.ijse.vehiServePro.dto.CustomerDTO;
 import lk.ijse.vehiServePro.dto.VehicleDTO;
 import lk.ijse.vehiServePro.model.CustomerModel;
@@ -50,6 +52,8 @@ public class VehiclePageController  {
         @FXML
         private TextField txtType;
 
+        VehicleBO vehicleBO = (VehicleBO) BOFactory.getBoFactory().getBO(BOFactory.BoTypes.VEHICLE);
+
 
 
     @FXML
@@ -71,9 +75,9 @@ public class VehiclePageController  {
 
         var dto = new VehicleDTO(id,name,num,brand,type);
 
-        var model = new VehicleModel();
+       // var model = new VehicleModel();
         try{
-            boolean isSaved = model.saveVehicle(dto);
+            boolean isSaved = vehicleBO.saveVehicle(dto);
             //tblCustomer.refresh();
             if(isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Vehicle Saved!").show();
@@ -96,10 +100,10 @@ public class VehiclePageController  {
         VehicleDTO dto = new VehicleDTO(id,name,num,brand,type);
 
 
-        var model = new VehicleModel();
+      //  var model = new VehicleModel();
         try{
 
-            boolean isUpdated = model.updateVehicle(dto);
+            boolean isUpdated = vehicleBO.updateVehicle(dto);
             System.out.println(isUpdated);
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Vehicle Updated!").show();
@@ -112,9 +116,9 @@ public class VehiclePageController  {
     void btnDeleteOnAction(ActionEvent event) {
         String id = txtId.getText();
 
-        var vehicleModel = new VehicleModel();
+       // var vehicleModel = new VehicleModel();
         try{
-            boolean isDeleted =vehicleModel.deleteCustomer(id);
+            boolean isDeleted =vehicleBO.deleteVehicle(id);
 
             if(isDeleted){
                // tblCustomer.refresh();
