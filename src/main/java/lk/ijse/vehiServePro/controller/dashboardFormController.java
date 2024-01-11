@@ -26,6 +26,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javafx.scene.control.Label;
+import lk.ijse.vehiServePro.bo.BOFactory;
+import lk.ijse.vehiServePro.bo.custom.ReservationBO;
 import lk.ijse.vehiServePro.dto.ReservationDTO;
 import lk.ijse.vehiServePro.dto.tm.ReservationTm;
 import lk.ijse.vehiServePro.model.ReservationModel;
@@ -34,6 +36,7 @@ import lk.ijse.vehiServePro.model.ReservationModel;
 public class dashboardFormController {
     @FXML
     public AnchorPane dash;
+    ReservationBO reservationBO = (ReservationBO) BOFactory.getBoFactory().getBO(BOFactory.BoTypes.RESERVATION);
 
 
 
@@ -216,12 +219,12 @@ public class dashboardFormController {
         colTime.setCellValueFactory(new PropertyValueFactory<>("time"));
     }
     private void loadAllCustomer(){
-        var model = new ReservationModel();
+        //var model = new ReservationModel();
 
         ObservableList<ReservationTm> obList = FXCollections.observableArrayList();
 
         try{
-            List<ReservationDTO> dtoList = model.getAllReservation();
+            List<ReservationDTO> dtoList = reservationBO.getAllReservation();
 
             for (ReservationDTO dto : dtoList){
                 obList.add(

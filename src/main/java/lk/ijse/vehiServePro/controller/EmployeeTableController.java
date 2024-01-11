@@ -8,6 +8,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lk.ijse.vehiServePro.bo.BOFactory;
+import lk.ijse.vehiServePro.bo.custom.EmployeeBO;
 import lk.ijse.vehiServePro.dto.EmployeeDTO;
 import lk.ijse.vehiServePro.dto.EmployeeDTO;
 import lk.ijse.vehiServePro.dto.tm.CustomerTm;
@@ -40,6 +42,8 @@ public class EmployeeTableController {
     @FXML
     private TableColumn<?, ?> colUser;
 
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBO(BOFactory.BoTypes.EMPLOYEE);
+
 
 
     public void initialize(){
@@ -58,12 +62,12 @@ public class EmployeeTableController {
         colUser.setCellValueFactory(new PropertyValueFactory<>("user"));
     }
     private void loadAllCustomer(){
-        var model = new EmployeeModel();
+       // var model = new EmployeeModel();
 
         ObservableList<EmployeeTm> obList = FXCollections.observableArrayList();
 
         try{
-            List<EmployeeDTO> dtoList = model.getAllEmployee();
+            List<EmployeeDTO> dtoList = employeeBO.getAllEmployee();
 
             for (EmployeeDTO dto : dtoList){
                 obList.add(

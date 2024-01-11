@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import lk.ijse.vehiServePro.bo.BOFactory;
+import lk.ijse.vehiServePro.bo.custom.StockBO;
 import lk.ijse.vehiServePro.dto.CustomerDTO;
 import lk.ijse.vehiServePro.dto.StocksDTO;
 import lk.ijse.vehiServePro.model.CustomerModel;
@@ -27,6 +29,8 @@ public class AddStockFormController {
     @FXML
     private TextField txtRemain;
 
+    StockBO stockBO = (StockBO) BOFactory.getBoFactory().getBO(BOFactory.BoTypes.STOCK);
+
     @FXML
     void btnSaveOnAction(ActionEvent event) {
         String id = txtId.getText();
@@ -38,9 +42,9 @@ public class AddStockFormController {
 
         var dto = new StocksDTO(id, name, price,remain, user);
 
-        var model = new StockModel();
+       // var model = new StockModel();
         try {
-            boolean isSaved = model.saveItem(dto);
+            boolean isSaved = stockBO.saveStocks(dto);
             //tblStocks.refresh();
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Stock Saved!").show();
@@ -65,10 +69,10 @@ public class AddStockFormController {
         StocksDTO dto = new StocksDTO(id, name, price,remain, user);
 
 
-        var model = new StockModel();
+       // var model = new StockModel();
         try {
 
-            boolean isUpdated = model.updateStock(dto);
+            boolean isUpdated = stockBO.updateStocks(dto);
             System.out.println(isUpdated);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Stock Updated!").show();
@@ -83,9 +87,9 @@ public class AddStockFormController {
     void btnDeleteOnAction(ActionEvent event) {
         String id = txtId.getText();
 
-        var stockModel = new StockModel();
+       // var stockModel = new StockModel();
         try {
-            boolean isDeleted = stockModel.deleteStock(id);
+            boolean isDeleted = stockBO.deleteStocks(id);
 
             if (isDeleted) {
                 //tblStock.refresh();

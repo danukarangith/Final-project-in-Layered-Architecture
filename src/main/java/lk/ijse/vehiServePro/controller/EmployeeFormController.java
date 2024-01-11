@@ -9,6 +9,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.vehiServePro.bo.BOFactory;
+import lk.ijse.vehiServePro.bo.custom.CustomerBO;
+import lk.ijse.vehiServePro.bo.custom.EmployeeBO;
 import lk.ijse.vehiServePro.dto.CustomerDTO;
 import lk.ijse.vehiServePro.dto.EmployeeDTO;
 import lk.ijse.vehiServePro.model.CustomerModel;
@@ -44,6 +47,8 @@ public class EmployeeFormController {
     @FXML
     private AnchorPane dash;
 
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBO(BOFactory.BoTypes.EMPLOYEE);
+
 
 
     @FXML
@@ -60,9 +65,9 @@ public class EmployeeFormController {
         if (isValidate) {
             var dto = new EmployeeDTO(name,id,contact,address,type,user);
 
-            var model = new EmployeeModel();
+           // var model = new EmployeeModel();
             try {
-                boolean isSaved = model.saveEmployee(dto);
+                boolean isSaved = employeeBO.saveEmployee(dto);
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Employee saved!").show();
                     clearFields();
@@ -135,10 +140,10 @@ public class EmployeeFormController {
         var dto = new EmployeeDTO(name,id,contact,address,type,user);
 
 
-        var model = new EmployeeModel();
+       // var model = new EmployeeModel();
         try{
 
-            boolean isUpdated = model.updateEmployee(dto);
+            boolean isUpdated = employeeBO.updateEmployee(dto);
             System.out.println(isUpdated);
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Employee Updated!").show();
@@ -152,9 +157,9 @@ public class EmployeeFormController {
     void btnDeleteOnAction(ActionEvent event) {
         String id = txtName.getText();
 
-        var EmployeeModel = new EmployeeModel();
+       // var EmployeeModel = new EmployeeModel();
         try{
-            boolean isDeleted = EmployeeModel.deleteCustomer(id);
+            boolean isDeleted = employeeBO.deleteEmployee(id);
 
             if(isDeleted){
                 //tblCustomer.refresh();

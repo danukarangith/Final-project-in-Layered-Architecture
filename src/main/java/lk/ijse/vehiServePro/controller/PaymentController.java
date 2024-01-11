@@ -8,6 +8,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import lk.ijse.vehiServePro.bo.BOFactory;
+import lk.ijse.vehiServePro.bo.custom.EmployeeBO;
+import lk.ijse.vehiServePro.bo.custom.PaymentBO;
 import lk.ijse.vehiServePro.db.DbConnection;
 import lk.ijse.vehiServePro.dto.PaymentDTO;
 import lk.ijse.vehiServePro.dto.VehicleDTO;
@@ -39,6 +42,7 @@ public class PaymentController {
 
     @FXML
     private ImageView myImage;
+    PaymentBO paymentBO = (PaymentBO) BOFactory.getBoFactory().getBO(BOFactory.BoTypes.PAYMENT);
 
 
 
@@ -62,9 +66,9 @@ public class PaymentController {
 
         var dto = new PaymentDTO(id,name,amount,method,detail);
 
-        var model = new PaymentModel();
+       // var model = new PaymentModel();
         try{
-            boolean isSaved = model.savePayment(dto);
+            boolean isSaved = paymentBO.savePayment(dto);
             //tblCustomer.refresh();
             if(isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Payment Details Save!").show();
@@ -88,10 +92,10 @@ public class PaymentController {
         var dto = new PaymentDTO(id,name,amount,method,detail);
 
 
-        var model = new PaymentModel();
+       // var model = new PaymentModel();
         try{
 
-            boolean isUpdated = model.updatePayment(dto);
+            boolean isUpdated = paymentBO.updatePayment(dto);
             System.out.println(isUpdated);
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Payment Details Update!").show();
@@ -105,9 +109,9 @@ public class PaymentController {
     void btnDeleteOnAction(ActionEvent event) {
         String id = txtId.getText();
 
-        var paymentModel = new PaymentModel();
+       // var paymentModel = new PaymentModel();
         try{
-            boolean isDeleted =paymentModel.deletePayment(id);
+            boolean isDeleted =paymentBO.deletePayment(id);
 
             if(isDeleted){
                 // tblCustomer.refresh();

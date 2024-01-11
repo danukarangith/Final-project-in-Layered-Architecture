@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.vehiServePro.bo.BOFactory;
+import lk.ijse.vehiServePro.bo.custom.SupplierBO;
 import lk.ijse.vehiServePro.dto.SupplierDTO;
 import lk.ijse.vehiServePro.dto.VehicleDTO;
 import lk.ijse.vehiServePro.model.SupplierModel;
@@ -25,6 +27,7 @@ public class StockSupplierFormController {
     private TextField txtName;
     @FXML
     private TextField txtAddress;
+    SupplierBO supplierBO = (SupplierBO) BOFactory.getBoFactory().getBO(BOFactory.BoTypes.SUPPLIER);
     @FXML
     void btnSaveOnAction(ActionEvent event) {
 
@@ -36,9 +39,9 @@ public class StockSupplierFormController {
 
         var dto = new SupplierDTO(id,name,address);
 
-        var model = new SupplierModel();
+       // var model = new SupplierModel();
         try{
-            boolean isSaved = model.saveSupplier(dto);
+            boolean isSaved = supplierBO.saveSupplier(dto);
             //tblCustomer.refresh();
             if(isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Supplier Saved!").show();
@@ -59,10 +62,10 @@ public class StockSupplierFormController {
         SupplierDTO dto = new SupplierDTO(id,name,address);
 
 
-        var model = new SupplierModel();
+       // var model = new SupplierModel();
         try{
 
-            boolean isUpdated = model.updateSupplier(dto);
+            boolean isUpdated = supplierBO.updateSupplier(dto);
             System.out.println(isUpdated);
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Supplier Updated!").show();
@@ -76,9 +79,9 @@ public class StockSupplierFormController {
     void btnDeleteOnAction(ActionEvent event) {
         String id = txtId.getText();
 
-        var supplierModell = new SupplierModel();
+      //  var supplierModell = new SupplierModel();
         try{
-            boolean isDeleted =supplierModell.deleteSupplier(id);
+            boolean isDeleted =supplierBO.deleteSupplier(id);
 
             if(isDeleted){
                 // tblCustomer.refresh();

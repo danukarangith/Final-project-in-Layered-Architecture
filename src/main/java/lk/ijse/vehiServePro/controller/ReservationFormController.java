@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.vehiServePro.Utill.EmailSender;
+import lk.ijse.vehiServePro.bo.BOFactory;
+import lk.ijse.vehiServePro.bo.custom.ReservationBO;
+import lk.ijse.vehiServePro.dao.DAOFactory;
 import lk.ijse.vehiServePro.dto.*;
 import lk.ijse.vehiServePro.dto.tm.ReservationTm;
 import lk.ijse.vehiServePro.model.*;
@@ -51,6 +54,8 @@ public class ReservationFormController {
 
     @FXML
     private TableColumn<?,?> colTime;
+
+    ReservationBO reservationBO = (ReservationBO) BOFactory.getBoFactory().getBO(BOFactory.BoTypes.RESERVATION);
 
 
    /* public void initialize(){
@@ -107,9 +112,9 @@ public class ReservationFormController {
         if (isValidate) {
             var dto = new ReservationDTO(id,email,vehNum,date,time);
 
-            var model = new ReservationModel();
+           // var model = new ReservationModel();
             try {
-                boolean isSaved = model.saveReservation(dto);
+                boolean isSaved = reservationBO.saveReservation(dto);
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Resrvation Add!").show();
                     clearFields();
@@ -153,10 +158,10 @@ public class ReservationFormController {
         var dto = new ReservationDTO(id,email,vehNum,date,time);
 
 
-        var model = new ReservationModel();
+     //   var model = new ReservationModel();
         try{
 
-            boolean isUpdated = model.updateReservation(dto);
+            boolean isUpdated = reservationBO.updateReservation(dto);
             System.out.println(isUpdated);
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Report Updated!").show();
@@ -170,9 +175,9 @@ public class ReservationFormController {
     void btnDeleteOnAction(ActionEvent event) {
         String id = txtId.getText();
 
-        var reservationModel = new ReservationModel();
+      //  var reservationModel = new ReservationModel();
         try{
-            boolean isDeleted = reservationModel.deleteReservation(id);
+            boolean isDeleted = reservationBO.deleteReservation(id);
 
             if(isDeleted){
                 // tblCustomer.refresh();

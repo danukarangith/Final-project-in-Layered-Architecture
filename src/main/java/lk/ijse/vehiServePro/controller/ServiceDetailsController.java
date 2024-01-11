@@ -6,6 +6,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import lk.ijse.vehiServePro.bo.BOFactory;
+import lk.ijse.vehiServePro.bo.custom.ServiceDetailBO;
 import lk.ijse.vehiServePro.db.DbConnection;
 import lk.ijse.vehiServePro.dto.ServiceDetailDTO;
 
@@ -39,6 +41,8 @@ public class ServiceDetailsController {
     @FXML
     private TextField txtId;
 
+    ServiceDetailBO serviceDetailBO = (ServiceDetailBO) BOFactory.getBoFactory().getBO(BOFactory.BoTypes.SERVICE_DETAIL);
+
 
 
     @FXML
@@ -54,9 +58,9 @@ public class ServiceDetailsController {
 
         var dto = new ServiceDetailDTO(id,Cuname,number,date,time,detail,Ename);
 
-        var model = new ServiceDetailModel();
+      //  var model = new ServiceDetailModel();
         try {
-            boolean isSaved = model.saveDetail(dto);
+            boolean isSaved = serviceDetailBO.saveServiceDetail(dto);
             //tblStocks.refresh();
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Report Saved!").show();
@@ -82,10 +86,10 @@ public class ServiceDetailsController {
         var dto = new ServiceDetailDTO(id,Cuname,number,date,time,detail,Ename);
 
 
-        var model = new ServiceDetailModel();
+       // var model = new ServiceDetailModel();
         try{
 
-            boolean isUpdated = model.updateDetail(dto);
+            boolean isUpdated = serviceDetailBO.updateServiceDetail(dto);
             System.out.println(isUpdated);
             if(isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Report Updated!").show();
@@ -99,9 +103,9 @@ public class ServiceDetailsController {
     void btnDeleteOnAction(ActionEvent event) {
         String id = txtId.getText();
 
-        var serviceDetailModel = new ServiceDetailModel();
+      //  var serviceDetailModel = new ServiceDetailModel();
         try{
-            boolean isDeleted = serviceDetailModel.deleteDetail(id);
+            boolean isDeleted = serviceDetailBO.deleteServiceDetail(id);
 
             if(isDeleted){
                // tblCustomer.refresh();

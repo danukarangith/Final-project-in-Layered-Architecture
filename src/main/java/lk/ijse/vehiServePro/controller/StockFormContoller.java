@@ -14,6 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.vehiServePro.bo.BOFactory;
+import lk.ijse.vehiServePro.bo.custom.StockBO;
 import lk.ijse.vehiServePro.dto.EmployeeDTO;
 import lk.ijse.vehiServePro.dto.StocksDTO;
 import lk.ijse.vehiServePro.dto.tm.EmployeeTm;
@@ -69,6 +71,7 @@ public class StockFormContoller {
 
     @FXML
     private TableColumn<?, ?> colUser;
+    StockBO stockBO = (StockBO) BOFactory.getBoFactory().getBO(BOFactory.BoTypes.STOCK);
 
 
 
@@ -88,12 +91,12 @@ public class StockFormContoller {
         colUser.setCellValueFactory(new PropertyValueFactory<>("user"));
     }
     private void loadAllCustomer(){
-        var model = new StockModel();
+      //  var model = new StockModel();
 
         ObservableList<StockTm> obList = FXCollections.observableArrayList();
 
         try{
-            List<StocksDTO> dtoList = model.getAll();
+            List<StocksDTO> dtoList = stockBO.getAllStocks();
 
             for (StocksDTO dto : dtoList){
                 obList.add(
